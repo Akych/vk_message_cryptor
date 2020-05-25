@@ -104,8 +104,11 @@ $(()=>{
     chatBox_buttonPanel.append(crypto_button)
     var Icon = $('#LibGear_crypto_button')
     var sendButton = $(".im-chat-input--send")
+
     crypto_button.click(()=>{
-        var text = chatBox_textenter.text()  
+        
+        var text = chatBox_textenter.text().replace(/[\"]/mgi,`\\"`)
+
         if (text.length < 0 || text == ""){
             return 
         }
