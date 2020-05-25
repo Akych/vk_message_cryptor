@@ -4,6 +4,7 @@ $(()=>{
     var key = "говноключ"
     var signature = "123"
     var onCEnter = false
+    const gg = "AKYCH_SHASHOLEOSH_LIBGEAR_2020."
     const spec_symbol = `⁣`
     const sailt = `U2FsdGVkX1`
     chrome.storage.local.get('settings', function(data) {
@@ -81,16 +82,12 @@ $(()=>{
             let msg =  $( this )
             if( !msg.attr('class').endsWith('detected')){
              try {
-
                 var decryptedBytes = CryptoJS.AES.decrypt(msg.text(), key);
                 var plaintext = decryptedBytes.toString(CryptoJS.enc.Utf8);
 
                 let r_key = plaintext.substring(0, 30);
+                let k_msg = sailt + plaintext.substring(30, plaintext.length);
 
-                let k_msg = sailt+plaintext.substring(31, plaintext.length);
-
-                console.log(r_key,k_msg)
-                
                 var decryptedBytes = CryptoJS.AES.decrypt(k_msg, r_key);
                 plaintext = decryptedBytes.toString(CryptoJS.enc.Utf8);
                 let array = JSON.parse(plaintext)
@@ -107,18 +104,14 @@ $(()=>{
     chatBox_buttonPanel.append(crypto_button)
     var Icon = $('#LibGear_crypto_button')
     var sendButton = $(".im-chat-input--send")
-
     crypto_button.click(()=>{
-
-        var text = chatBox_textenter.text()
+        var text = chatBox_textenter.text()  
         if (text.length < 0 || text == ""){
             return 
         }
-
-        let r_key = sailt + randKey(20)
-        console.log("r_key len - ",r_key.length)
-        let json = `{"signature" : "${signature}" , "msg" : "${text}"}`
-        let msg =  CryptoJS.AES.encrypt(r_key+spec_symbol+ CryptoJS.AES.encrypt(json, r_key).toString().replace(/^(U2FsdGVkX1)/g,"") ,key) 
+        let r_key = sailt + randKey(20)   
+        let json = `{"signature" : "${signature}" , "msg" : "${text}"}`  
+        let msg =  CryptoJS.AES.encrypt(r_key + CryptoJS.AES.encrypt(json, r_key).toString().replace(/^(U2FsdGVkX1)/g,"") , key) 
         chatBox_textenter.text( msg )
         sendButton.click()
     })

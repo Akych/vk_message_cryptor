@@ -1,17 +1,24 @@
 {
-    "name": "Vk message cryptor",
-    "description" : "111",
+    "name": "VK message cryptor",
+    "description" : "Little msg cryptor",
     "version": "1",
     "manifest_version": 2,
+
+    "icons": {
+      "16": "./i/logo.png",
+      "48": "./i/logo.png",
+      "128": "./i/logo.png"
+    },
+
     "browser_action": {
-      "default_icon": "icon.png",
-      "default_title": "shits",
+      "default_icon": "./i/icon.png",
+      "default_title": "GTFO",
       "default_popup":"./popup_menu/popup.html"
     },
     "content_scripts": [
         {
           "matches": ["https://vk.com/*"],
-          "js": ["./scripts/crypt.js","./scripts/jquery.js","./scripts/index.js"],
+          "js": ["./scripts/jquery.js","./scripts/crypt.js","./scripts/index.js"],
           "run_art": "document_end"
         }
     ],

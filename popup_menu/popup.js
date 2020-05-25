@@ -19,8 +19,8 @@ $(()=>{
 
     chrome.storage.local.get('settings', function(data) {
         let arr = data["settings"] 
-        $("#key_send_text").val( arr.key  || "LibGear_Akych" )  
-        $("#pod_send_text").val( arr.code || "LibGear_team" )
+        $("#key_send_text").val( arr.key  || "Key" )  
+        $("#pod_send_text").val( arr.code || "Name" )
         switcher = arr.enter_send || false
         setSwitch(switcher);
     });
@@ -29,13 +29,12 @@ $(()=>{
     const save_all = ()=>{
         chrome.storage.local.set({
             "settings" :{
-                "key" : $("#key_send_text").val(),
-                "code": $("#pod_send_text").val(),
-                "enter_send": switcher
+                "key" : $("#key_send_text").val() || "Key",
+                "code": $("#pod_send_text").val() || "Name",
+                "enter_send": switcher 
             }
         });
     }
-
 
     const contents = chrome.extension.getURL("i");
 
@@ -68,15 +67,7 @@ $(()=>{
     key_rand.click(()=>{
         $("#key_send_text").val( randKey(16) )
     })
-/*
-    const pod_rand = $("#pod_rand")
-    setHover(pod_rand,contents+"/images/Random-default.png" , contents+"/images/Random-hover.png",contents+"/images/Random-click.png")
-    pod_rand .click(()=>{
-        $("#pod_send_text").val( randKey(16) )
-    })
-*/
 
-    
     var switcher_value = "";
     const setSwitch = (switcher) => {
       if (switcher) {
