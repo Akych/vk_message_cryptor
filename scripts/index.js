@@ -4,8 +4,6 @@ $(()=>{
     var key = "говноключ"
     var signature = "123"
     var onCEnter = false
-    const gg = "AKYCH_SHASHOLEOSH_LIBGEAR_2020."
-    const spec_symbol = `⁣`
     const sailt = `U2FsdGVkX1`
     chrome.storage.local.get('settings', function(data) {
         
@@ -91,10 +89,10 @@ $(()=>{
                 var decryptedBytes = CryptoJS.AES.decrypt(k_msg, r_key);
                 plaintext = decryptedBytes.toString(CryptoJS.enc.Utf8);
                 let array = JSON.parse(plaintext)
-               // if (array.signature){
+                if (array.signature != undefined){
                     msg.text( array.msg )
                     msg.prepend($(`<span style='color:RGB(100,100,100)' >${array.signature} </span><span style='color:RGB(160,160,160)' >➤ </span>`))
-               // }
+                }
               } catch (err) {}
                 msg.addClass('detected');
             }
